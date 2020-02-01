@@ -1,0 +1,15 @@
+{
+  "name": "studienarbeit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ExcelParser.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "exceljs": "^3.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "parse": "node ExcelParser.js",
+    "upload": "node UploadArticles.js"
+  }
+}
