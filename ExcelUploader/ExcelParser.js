@@ -5,6 +5,7 @@ var workbook = new Excel.Workbook();
 var articles = [];
 var article = {};
 
+console.log("Parsing Excel spreadsheet.....\n");
 workbook.xlsx.readFile('Artikel.xlsx')
     .then(function () {
         let worksheet = workbook.getWorksheet('Artikel-VK-Preise');
@@ -13,22 +14,21 @@ workbook.xlsx.readFile('Artikel.xlsx')
             if (rowNumber == 1) {
                 row.eachCell(function (cell, cellNumber) {
                     if (cell.value.substr(0, 9) !== "Allergen ") {
-                        article[cell.value] = null;
+                        article[cell.value.replace(/[\süäöß().\-/]+/g, '')] = null;
                     }
                 })
             } else {
                 let articleCopy = JSON.parse(JSON.stringify(article));
                 row.eachCell(function (cell, cellNumber) {
                     if (firstRow.getCell(cellNumber).value.substr(0, 9) !== "Allergen ") {
-                        articleCopy[firstRow.getCell(cellNumber).value] = cell.value;
+                        articleCopy[firstRow.getCell(cellNumber).value.replace(/[\süäöß().\-/]+/g, '')] = cell.value;
                     }
                 })
                 articles.push(articleCopy);
             }
         });
-        console.log(articles[0]);
 
-        let file = fs.createWriteStream('Artikles.json');
+        let file = fs.createWriteStream('Artikel.json');
         file.on('error', function (err) { console.log("File error: " + err) });
         file.write("{\"articles\": [\n");
         articles.forEach(function (article, index) {
@@ -39,4 +39,5 @@ workbook.xlsx.readFile('Artikel.xlsx')
         });
         file.write("]}");
         file.end();
+        console.log("Excel file successfully parsed!\n");
     });

@@ -4,12 +4,14 @@
   "description": "",
   "main": "ExcelParser.js",
   "dependencies": {
-    "axios": "^0.19.2",
+    "contentful-management": "^5.12.0",
     "exceljs": "^3.7.0"
   },
   "devDependencies": {},
   "scripts": {
     "parse": "node ExcelParser.js",
-    "upload": "node UploadArticles.js"
+    "upload": "node UploadArticles.js",
+    "publish": "node PublishArticles.js",
+    "start": "node ExcelParser.js && node UploadArticles.js && node PublishArticles.js"
   }
 }
