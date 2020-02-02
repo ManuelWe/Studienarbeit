@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import DashboardCard from '@/components/DashboardCard.vue';
+import DashboardCard from '../components/DashboardCard.vue';
 
 export default {
   components: {

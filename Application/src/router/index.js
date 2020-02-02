@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Dashboard from '../views/Dashboard.vue';
 import Products from '../views/Products.vue';
+import Product from '../views/Product.vue';
+import Default404 from '../views/Default404.vue';
 
 Vue.use(VueRouter);
 
@@ -15,6 +17,16 @@ const routes = [
     path: '/produkte',
     name: 'products',
     component: Products,
+  },
+  {
+    path: '/produkte/:id',
+    name: 'product',
+    component: Product,
+  },
+  {
+    path: '*',
+    name: 'default',
+    component: Default404,
   },
 ];
 

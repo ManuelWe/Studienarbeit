@@ -2,11 +2,11 @@
   <div>
     <router-link
       class="router-link"
-      :to="{name: 'products'}"
+      :to="{name: 'product'}"
     >
       <b-card
-        :title="product.fields.name"
-        img-src="https://picsum.photos/600/300/?image=25"
+        :title="product.fields.Artikelbezeichnung"
+        img-src="https://www.packtech-gmbh.de/site/assets/files/1017/backwaren.1920x1080.jpg"
         img-alt="Image"
         img-top
         tag="article"
