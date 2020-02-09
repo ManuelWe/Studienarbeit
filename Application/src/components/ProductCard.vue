@@ -2,7 +2,7 @@
   <div>
     <router-link
       class="router-link"
-      :to="{name: 'product'}"
+      :to="{name: 'product', params: {ArtNr: product.fields.ArtNr}}"
     >
       <b-card
         :title="product.fields.Artikelbezeichnung"

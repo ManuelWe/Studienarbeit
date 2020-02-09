@@ -17,8 +17,9 @@
 </template>
 
 <script>
-import ProductsService from '../services/ProductsService';
+import ProductsService from '../services/API/ProductsService';
 import ProductCard from '../components/ProductCard.vue';
+import idbs from '../services/IndexedDB/ProductsService';
 
 export default {
   components: {
@@ -37,6 +38,7 @@ export default {
       ProductsService.getProducts().then((response) => {
         console.log(response);
         this.products = response.data.items;
+        idbs.save(response.data.items);
       });
     },
   },
