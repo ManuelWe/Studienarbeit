@@ -12,6 +12,7 @@
     "parse": "node ExcelParser.js",
     "upload": "node UploadArticles.js",
     "publish": "node PublishArticles.js",
-    "start": "node ExcelParser.js && node UploadArticles.js && node PublishArticles.js"
+    "images": "node UploadImages.js",
+    "start": "node ExcelParser.js && node UploadArticles.js && node PublishArticles.js && node UploadImages.js"
   }
 }
