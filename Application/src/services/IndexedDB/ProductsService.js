@@ -9,6 +9,9 @@ const dbPromise = () => {
       db.createObjectStore('products', {
         keyPath: 'ArtNr',
       });
+      db.createObjectStore('images', {
+        keyPath: 'ArtNr',
+      });
     },
   });
 };

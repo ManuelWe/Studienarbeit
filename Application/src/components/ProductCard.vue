@@ -2,11 +2,11 @@
   <div>
     <router-link
       class="router-link"
-      :to="{name: 'product', params: {ArtNr: product.fields.ArtNr}}"
+      :to="{name: 'product', params: {ArtNr: product.ArtNr}}"
     >
       <b-card
-        :title="product.fields.Artikelbezeichnung"
-        img-src="https://www.packtech-gmbh.de/site/assets/files/1017/backwaren.1920x1080.jpg"
+        :title="product.Artikelbezeichnung"
+        :img-src="productImage"
         img-alt="Image"
         img-top
         tag="article"
@@ -22,12 +22,30 @@
 </template>
 
 <script>
+import ImagesDB from '../services/IndexedDB/ImagesService';
+
 export default {
   props: {
     product: {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      productImage: null,
+    };
+  },
+  created() {
+    ImagesDB.getOne(this.product.ArtNr).then((image) => {
+      if (image === undefined) {
+        ImagesDB.getOne('default').then((defaultImg) => {
+          this.productImage = defaultImg.base64;
+        });
+      } else {
+        this.productImage = image.base64;
+      }
+    });
   },
 };
 </script>

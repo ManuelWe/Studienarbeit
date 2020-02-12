@@ -7,7 +7,7 @@ var client = contentful.createClient({
     accessToken: 'CFPAT-I64BgFiznHaozenhCw8jaIVVXj_r9K96ADaouiqf3fM'
 })
 
-console.log("Starting upload....\n");
+console.log("Beginne upload....\n");
 client.getSpace('kfibk3xh1vwb')
     .then((space) => space.getEnvironment('master')
         .then((environment) => {

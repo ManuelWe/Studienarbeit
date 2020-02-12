@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import ProductsService from '../services/API/ProductsService';
-import ImagesService from '../services/API/ImagesService';
 import ProductCard from '../components/ProductCard.vue';
 import idbs from '../services/IndexedDB/ProductsService';
 
@@ -29,26 +27,12 @@ export default {
   data() {
     return {
       products: [],
-      test: null,
     };
   },
   created() {
-    this.getProducts();
-    this.getImages();
-  },
-  methods: {
-    getProducts() {
-      ProductsService.getProducts().then((response) => {
-        console.log(response);
-        this.products = response.data.items;
-        idbs.save(response.data.items);
-      });
-    },
-    getImages() {
-      ImagesService.getImages().then((response) => {
-        this.test = response.data.items[0].fields.file.url;
-      });
-    },
+    idbs.getAll().then((products) => {
+      this.products = products;
+    });
   },
 };
 </script>

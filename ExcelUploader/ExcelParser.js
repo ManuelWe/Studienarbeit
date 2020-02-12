@@ -39,5 +39,5 @@ workbook.xlsx.readFile('Artikel.xlsx')
         });
         file.write("]}");
         file.end();
-        console.log("Excel file successfully parsed!\n");
+        console.log("Excel spreadsheet erfolgreich geparsed!\n");
     });
