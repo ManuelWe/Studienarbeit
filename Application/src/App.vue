@@ -48,7 +48,7 @@ export default {
     getProducts() {
       ProductsService.getProducts().then((response) => {
         console.log(response);
-        this.products = response.data.items;
+        this.$store.dispatch('saveProducts', response.data.items);
         ProductsDB.save(response.data.items);
       });
     },
@@ -61,6 +61,7 @@ export default {
             base64Images.push({ ArtNr: image.fields.title, base64: base64Img });
           });
         });
+        this.$store.dispatch('saveImages', base64Images);
         ImagesDB.save(base64Images);
       });
     },

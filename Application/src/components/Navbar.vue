@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="columns">
+    <div class="columns is-mobile">
       <div class="column has-text-centered">
         <router-link :to="{name: 'dashboard'}">
           <button class="button">
@@ -18,48 +18,18 @@
       <div class="column has-text-centered">
         <router-link :to="{name: 'products'}">
           <button class="button">
-            kalskdkw
+            Allergene
           </button>
         </router-link>
       </div>
       <div class="column has-text-centered">
         <router-link :to="{name: 'products'}">
           <button class="button">
-            mcnsdjdduw
+            Torten
           </button>
         </router-link>
       </div>
     </div>
-    <!-- <div class="content centered">
-      <div class="field is-grouped">
-        <p class="control">
-          <button class="button is-link">
-            Save changes
-          </button>
-        </p>
-        <p class="control">
-          <button class="button">
-            Cancel
-          </button>
-        </p>
-        <p class="control">
-          <button class="button is-danger">
-            Delete post
-          </button>
-        </p>
-      </div> -->
-    <!-- <router-link :to="{name: 'dashboard'}">
-        Dashboard
-      </router-link>
-      <router-link :to="{name: 'products'}">
-        Produkte
-      </router-link>
-      <router-link :to="{name: 'products'}">
-        Bla
-      </router-link>
-      <router-link :to="{name: 'products'}">
-        Da
-      </router-link> -->
   </footer>
 </template>
 

@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import ImagesDB from '../services/IndexedDB/ImagesService';
-
 export default {
   props: {
     product: {
@@ -38,16 +36,13 @@ export default {
       productImage: null,
     };
   },
+  computed: {
+    getImage() {
+      return this.$store.getters.getImageByArtNr;
+    },
+  },
   created() {
-    ImagesDB.getOne(this.product.ArtNr).then((image) => {
-      if (image === undefined) {
-        ImagesDB.getOne('default').then((defaultImg) => {
-          this.productImage = defaultImg.base64;
-        });
-      } else {
-        this.productImage = image.base64;
-      }
-    });
+    this.productImage = this.getImage(this.product.ArtNr);
   },
 };
 </script>

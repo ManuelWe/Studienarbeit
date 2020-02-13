@@ -1,10 +1,10 @@
 <template>
   <div id="dashboard">
-    <div class="columns is-multiline">
+    <div class="columns is-multiline is-mobile">
       <div
         v-for="(category, index) in categories"
         :key="index"
-        class="column is-one-quarter-desktop is-half-tablet"
+        class="column is-one-quarter-desktop is-half-tablet is-half-mobile"
       >
         <DashboardCard :category="category" />
       </div>

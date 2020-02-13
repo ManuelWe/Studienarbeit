@@ -157,9 +157,6 @@
 </template>
 
 <script>
-import ProductDB from '../services/IndexedDB/ProductsService';
-import ImagesDB from '../services/IndexedDB/ImagesService';
-
 export default {
   data() {
     return {
@@ -168,19 +165,17 @@ export default {
       productImage: null,
     };
   },
+  computed: {
+    getProduct() {
+      return this.$store.getters.getProductByArtNr;
+    },
+    getImage() {
+      return this.$store.getters.getImageByArtNr;
+    },
+  },
   created() {
-    ProductDB.getOne(this.ArtNr).then((product) => {
-      this.product = product;
-      ImagesDB.getOne(product.ArtNr).then((image) => {
-        if (image === undefined) {
-          ImagesDB.getOne('default').then((defaultImg) => {
-            this.productImage = defaultImg.base64;
-          });
-        } else {
-          this.productImage = image.base64;
-        }
-      });
-    });
+    this.product = this.getProduct(this.ArtNr);
+    this.productImage = this.getImage(this.ArtNr);
   },
 };
 </script>

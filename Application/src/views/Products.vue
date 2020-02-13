@@ -1,10 +1,10 @@
 <template>
   <div id="products">
-    <div class="columns is-multiline">
+    <div class="columns is-multiline is-mobile">
       <div
         v-for="(product, index) in products"
         :key="index"
-        class="column is-one-quarter-desktop is-half-tablet"
+        class="column is-one-quarter-desktop is-half-tablet is-half-mobile"
       >
         <ProductCard :product="product" />
       </div>
@@ -13,22 +13,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import ProductCard from '../components/ProductCard.vue';
-import idbs from '../services/IndexedDB/ProductsService';
 
 export default {
   components: {
     ProductCard,
   },
-  data() {
-    return {
-      products: [],
-    };
-  },
-  created() {
-    idbs.getAll().then((products) => {
-      this.products = products;
-    });
+  computed: {
+    ...mapState(['products']),
   },
 };
 </script>
