@@ -4,7 +4,16 @@ const dbPromise = () => {
   if (!('indexedDB' in window)) {
     throw new Error('Browser does not support IndexedDB');
   }
-  return openDB('bäckereiDB', 1);
+  return openDB('bäckereiDB', 1, {
+    upgrade(db) {
+      db.createObjectStore('products', {
+        keyPath: 'ArtNr',
+      });
+      db.createObjectStore('images', {
+        keyPath: 'ArtNr',
+      });
+    },
+  });
 };
 
 const save = async (images) => {

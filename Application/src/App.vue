@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <Navbar />
-    <main role="main">
-      <router-view />
-    </main>
-    <img
-      id="test"
-      :src="test"
-    >
+    <section class="section">
+      <div class="container">
+        <Navbar />
+        <main role="main">
+          <router-view />
+        </main>
+        <img
+          id="test"
+          :src="test"
+        >
+      </div>
+    </section>
   </div>
 </template>
 

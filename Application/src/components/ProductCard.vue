@@ -4,19 +4,21 @@
       class="router-link"
       :to="{name: 'product', params: {ArtNr: product.ArtNr}}"
     >
-      <b-card
-        :title="product.Artikelbezeichnung"
-        :img-src="productImage"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem;"
-        class="mb-2"
-      >
-        <b-card-text>
-          Kurzer Text
-        </b-card-text>
-      </b-card>
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-3by2">
+            <img
+              :src="productImage"
+              :alt="product.Artikelbezeichnung"
+            >
+          </figure>
+        </div>
+        <footer class="card-footer">
+          <a class="card-footer-item">
+            {{ product.Artikelbezeichnung }}
+          </a>
+        </footer>
+      </div>
     </router-link>
   </div>
 </template>

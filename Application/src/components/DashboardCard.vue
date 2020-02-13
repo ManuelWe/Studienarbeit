@@ -4,19 +4,21 @@
       class="router-link"
       :to="{name: 'products'}"
     >
-      <b-card
-        :title="category"
-        img-src="https://picsum.photos/600/300/?image=25"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem;"
-        class="mb-2"
-      >
-        <b-card-text>
-          Kurzer Text
-        </b-card-text>
-      </b-card>
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-3by2">
+            <img
+              src="https://unsplash.it/300/200/?random&pic=1"
+              alt=""
+            >
+          </figure>
+        </div>
+        <footer class="card-footer">
+          <a class="card-footer-item">
+            {{ category }}
+          </a>
+        </footer>
+      </div>
     </router-link>
   </div>
 </template>

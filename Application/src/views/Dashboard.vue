@@ -1,16 +1,12 @@
 <template>
-  <div class="dashboard">
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div
-            v-for="(category, index) in categories"
-            :key="index"
-            class="col-md-4"
-          >
-            <DashboardCard :category="category" />
-          </div>
-        </div>
+  <div id="dashboard">
+    <div class="columns is-multiline">
+      <div
+        v-for="(category, index) in categories"
+        :key="index"
+        class="column is-one-quarter-desktop is-half-tablet"
+      >
+        <DashboardCard :category="category" />
       </div>
     </div>
   </div>

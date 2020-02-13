@@ -1,15 +1,11 @@
 import Vue from 'vue';
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
+import Buefy from 'buefy';
+import 'buefy/dist/buefy.css';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-
-Vue.use(BootstrapVue);
-Vue.use(BootstrapVueIcons);
-
+Vue.use(Buefy);
 Vue.config.productionTip = false;
 
 new Vue({

@@ -1,16 +1,12 @@
 <template>
-  <div class="products">
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div
-            v-for="(product, index) in products"
-            :key="index"
-            class="col-md-4"
-          >
-            <ProductCard :product="product" />
-          </div>
-        </div>
+  <div id="products">
+    <div class="columns is-multiline">
+      <div
+        v-for="(product, index) in products"
+        :key="index"
+        class="column is-one-quarter-desktop is-half-tablet"
+      >
+        <ProductCard :product="product" />
       </div>
     </div>
   </div>
