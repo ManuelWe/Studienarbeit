@@ -8,6 +8,7 @@
         <div class="card-image">
           <figure class="image is-3by2">
             <img
+              class="cardImage"
               :src="productImage"
               :alt="product.Artikelbezeichnung"
             >
@@ -42,6 +43,22 @@ export default {
     },
   },
   created() {
+    if (this.product.ArtNr === '1200') {
+      console.time('d');
+    } else if (this.product.ArtNr === '1295') {
+      console.timeEnd('d');
+    }
+    console.time('a');
+
+    console.timeEnd('a');
+    console.time('b');
+  },
+  beforeMount() {
+    console.timeEnd('b');
+    if (this.product.ArtNr === '1200') console.time('c');
+  },
+  mounted() {
+    if (this.product.ArtNr === '1200') console.timeEnd('c');
     this.productImage = this.getImage(this.product.ArtNr);
   },
 };
@@ -50,5 +67,14 @@ export default {
 <style scoped>
 .router-link, .router-link:hover {
   color: inherit;
+}
+.card {
+  border-radius: 0.5rem;
+  box-shadow: 0.15rem 0.15rem 0.2rem 0.1rem rgba(0, 0, 0, 0.2),
+  0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.19);
+}
+.cardImage {
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
 }
 </style>
