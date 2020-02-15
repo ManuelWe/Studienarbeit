@@ -2,7 +2,7 @@
   <div id="app">
     <section class="section">
       <div class="container">
-        <Navbar />
+        <Footer />
         <main role="main">
           <router-view />
         </main>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue';
+import Footer from './components/Footer.vue';
 import ProductsService from './services/API/ProductsService';
 import ImagesService from './services/API/ImagesService';
 import ProductsDB from './services/IndexedDB/ProductsService';
@@ -25,7 +25,7 @@ import ImagesDB from './services/IndexedDB/ImagesService';
 
 export default {
   components: {
-    Navbar,
+    Footer,
   },
   data() {
     return {
@@ -57,6 +57,7 @@ export default {
         const base64Images = [];
 
         response.data.items.forEach((image) => {
+          this.test = image.fields.file.url;
           this.convertImgToBase64URL(image.fields.file.url, (base64Img) => {
             base64Images.push({ ArtNr: image.fields.title, base64: base64Img });
           });

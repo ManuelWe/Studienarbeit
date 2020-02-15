@@ -33,8 +33,8 @@ export default {
   },
   methods: {
     infiniteHandler($state) {
-      if (this.productsDisplayed <= this.products.length - 4) {
-        this.productsDisplayed += 4;
+      if (this.productsDisplayed <= this.products.length - 8) {
+        this.productsDisplayed += 8;
         $state.loaded();
       } else if (this.productsDisplayed < this.products.length) {
         this.productsDisplayed = this.products.length();

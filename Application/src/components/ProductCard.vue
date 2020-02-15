@@ -43,23 +43,7 @@ export default {
     },
   },
   created() {
-    if (this.product.ArtNr === '1200') {
-      console.time('d');
-    } else if (this.product.ArtNr === '1295') {
-      console.timeEnd('d');
-    }
-    console.time('a');
-
-    console.timeEnd('a');
-    console.time('b');
-  },
-  beforeMount() {
-    console.timeEnd('b');
-    if (this.product.ArtNr === '1200') console.time('c');
-  },
-  mounted() {
-    if (this.product.ArtNr === '1200') console.timeEnd('c');
-    this.productImage = this.getImage(this.product.ArtNr);
+    setTimeout(() => { this.productImage = this.getImage(this.product.ArtNr); }, 0);
   },
 };
 </script>
