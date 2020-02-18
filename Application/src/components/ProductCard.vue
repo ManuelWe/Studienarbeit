@@ -9,7 +9,7 @@
           <figure class="image is-3by2">
             <img
               class="cardImage"
-              src="https://images.ctfassets.net/kfibk3xh1vwb/B5SY5CYcZxbmlZWZ0XCcJ/efed3c1a56081b66d4a9fcc469c8d5f2/0100.jpg"
+              :src="getImage(product.ArtNr)"
               :alt="product.Artikelbezeichnung"
             >
           </figure>
@@ -30,22 +30,10 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      productImage: null,
-    };
-  },
   computed: {
     getImage() {
       return this.$store.getters.getImageByArtNr;
     },
-  },
-  created() {
-    setTimeout(() => {
-      console.time('a');
-      this.productImage = this.getImage(this.product.ArtNr);
-      console.timeEnd('a');
-    }, 0);
   },
 };
 </script>

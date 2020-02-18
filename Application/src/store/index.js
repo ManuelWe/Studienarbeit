@@ -34,9 +34,9 @@ export default new Vuex.Store({
     getImageByArtNr: (state) => (ArtNr) => {
       const image = state.images.find((img) => img.ArtNr === ArtNr);
       if (image === undefined) {
-        return state.images.find((img) => img.ArtNr === 'default').base64;
+        return state.images.find((img) => img.ArtNr === 'default').url;
       }
-      return image.base64;
+      return image.url;
     },
   },
 });

@@ -20,7 +20,7 @@
       <div class="column">
         <figure class="image is-512x512">
           <img
-            :src="productImage"
+            :src="getImage(ArtNr)"
           >
         </figure>
       </div>
@@ -175,7 +175,6 @@ export default {
   },
   created() {
     this.product = this.getProduct(this.ArtNr);
-    this.productImage = this.getImage(this.ArtNr);
   },
 };
 </script>
