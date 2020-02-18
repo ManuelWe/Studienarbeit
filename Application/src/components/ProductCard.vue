@@ -1,6 +1,9 @@
 <template>
   <div>
-    <router-link class="router-link" :to="{name: 'product', params: {ArtNr: product.ArtNr}}">
+    <router-link
+      class="router-link"
+      :to="{name: 'product', params: {ArtNr: product.ArtNr}}"
+    >
       <div class="card">
         <div class="card-image">
           <figure class="image is-3by2">
@@ -8,7 +11,7 @@
               class="cardImage"
               src="https://images.ctfassets.net/kfibk3xh1vwb/B5SY5CYcZxbmlZWZ0XCcJ/efed3c1a56081b66d4a9fcc469c8d5f2/0100.jpg"
               :alt="product.Artikelbezeichnung"
-            />
+            >
           </figure>
         </div>
         <footer class="card-footer">
@@ -24,24 +27,26 @@ export default {
   props: {
     product: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      productImage: null
+      productImage: null,
     };
   },
   computed: {
     getImage() {
       return this.$store.getters.getImageByArtNr;
-    }
+    },
   },
   created() {
     setTimeout(() => {
+      console.time('a');
       this.productImage = this.getImage(this.product.ArtNr);
+      console.timeEnd('a');
     }, 0);
-  }
+  },
 };
 </script>
 
