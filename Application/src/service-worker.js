@@ -1,6 +1,6 @@
 /* eslint-disable */
 /**
- * Welcome to your Workbox-powered service worker!
+ * Welcome to your Workbox-powered service worker1!
  *
  * You'll need to register this file in your web app and you should
  * disable HTTP caching for this file too.
@@ -14,7 +14,7 @@
 
 workbox.setConfig({ debug: true });
 
-workbox.core.setCacheNameDetails({prefix: "kundeninformationssystem"});
+workbox.core.setCacheNameDetails({ prefix: "kundeninformationssystem" });
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
@@ -30,4 +30,6 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerRoute(/\.(jpg|png|jpeg)$/, new workbox.strategies.StaleWhileRevalidate({ "cacheName":"images", plugins: [] }), 'GET');
+workbox.routing.registerRoute(new RegExp('https:\/\/images.ctfassets.net\/kfibk3xh1vwb\/*'), new workbox.strategies.CacheFirst({ "cacheName": "images", plugins: [] }), 'GET');
+workbox.routing.registerRoute('https://cdn.contentful.com/spaces/kfibk3xh1vwb/entries?content_type=produkt', new workbox.strategies.CacheFirst({ "cacheName": "products", plugins: [] }), 'GET');
+workbox.routing.registerRoute('https://cdn.contentful.com/spaces/kfibk3xh1vwb/assets', new workbox.strategies.CacheFirst({ "cacheName": "assets", plugins: [] }), 'GET');

@@ -11,19 +11,19 @@ module.exports = {
 
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-        swSrc: 'src/service-worker.js',
+      swSrc: 'src/service-worker.js',
     }
 
     //workboxOptions: {
-      // runtimeCaching: [
-      //   {
-      //     urlPattern: /\.(jpg|png|jpeg)$/,
-      //     handler: "StaleWhileRevalidate",
-      //     options: {
-      //       cacheName: "images",
-      //     }
-      //   }
-      // ]
+    // runtimeCaching: [
+    //   {
+    //     urlPattern: /\.(jpg|png|jpeg)$/,
+    //     handler: "StaleWhileRevalidate",
+    //     options: {
+    //       cacheName: "images",
+    //     }
+    //   }
+    // ]
     //},
   },
 };

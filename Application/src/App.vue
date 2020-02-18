@@ -2,41 +2,38 @@
   <div id="app">
     <section class="section">
       <div class="container">
+        <h1>nooooooo1</h1>
         <Footer />
         <main role="main">
           <router-view />
         </main>
-        <img
-          id="test"
-          :src="test"
-        >
+        <img id="test" :src="test" />
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import Footer from './components/Footer.vue';
-import ProductsService from './services/API/ProductsService';
-import ImagesService from './services/API/ImagesService';
-import ProductsDB from './services/IndexedDB/ProductsService';
-import ImagesDB from './services/IndexedDB/ImagesService';
-
+import Footer from "./components/Footer.vue";
+import ProductsService from "./services/API/ProductsService";
+import ImagesService from "./services/API/ImagesService";
+// import ProductsDB from './services/IndexedDB/ProductsService';
+// import ImagesDB from './services/IndexedDB/ImagesService';
 
 export default {
   components: {
-    Footer,
+    Footer
   },
   data() {
     return {
-      test: null,
+      test: null
     };
   },
   // for github pages; hack to enable routes for spa
   mounted() {
-    const path = localStorage.getItem('path');
+    const path = localStorage.getItem("path");
     if (path) {
-      localStorage.removeItem('path');
+      localStorage.removeItem("path");
       this.$router.replace(path);
     }
   },
@@ -46,32 +43,32 @@ export default {
   },
   methods: {
     getProducts() {
-      ProductsService.getProducts().then((response) => {
+      ProductsService.getProducts().then(response => {
         console.log(response);
-        this.$store.dispatch('saveProducts', response.data.items);
-        ProductsDB.save(response.data.items);
+        this.$store.dispatch("saveProducts", response.data.items);
+        // ProductsDB.save(response.data.items);
       });
     },
     getImages() {
-      ImagesService.getImages().then((response) => {
+      ImagesService.getImages().then(response => {
         const base64Images = [];
 
-        response.data.items.forEach((image) => {
+        response.data.items.forEach(image => {
           this.test = image.fields.file.url;
-          this.convertImgToBase64URL(image.fields.file.url, (base64Img) => {
+          this.convertImgToBase64URL(image.fields.file.url, base64Img => {
             base64Images.push({ ArtNr: image.fields.title, base64: base64Img });
           });
         });
-        this.$store.dispatch('saveImages', base64Images);
-        ImagesDB.save(base64Images);
+        this.$store.dispatch("saveImages", base64Images);
+        // ImagesDB.save(base64Images);
       });
     },
     convertImgToBase64URL(url, callback, outputFormat) {
       const img = new Image();
-      img.crossOrigin = 'Anonymous';
+      img.crossOrigin = "Anonymous";
       img.onload = () => {
-        let canvas = document.createElement('CANVAS');
-        const ctx = canvas.getContext('2d');
+        let canvas = document.createElement("CANVAS");
+        const ctx = canvas.getContext("2d");
         canvas.height = img.height;
         canvas.width = img.width;
         ctx.drawImage(img, 0, 0);
@@ -80,8 +77,7 @@ export default {
         canvas = null;
       };
       img.src = url;
-    },
-
-  },
+    }
+  }
 };
 </script>
