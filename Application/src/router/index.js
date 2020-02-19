@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Dashboard from '../views/Dashboard.vue';
 import Products from '../views/Products.vue';
 import Product from '../views/Product.vue';
+import Kreuztabelle from '../views/Kreuztabelle.vue';
 import Default404 from '../views/Default404.vue';
 
 Vue.use(VueRouter);
@@ -22,6 +23,11 @@ const routes = [
     path: '/produkte/:ArtNr',
     name: 'product',
     component: Product,
+  },
+  {
+    path: '/kreuztabelle',
+    name: 'kreuztabelle',
+    component: Kreuztabelle,
   },
   {
     path: '*',

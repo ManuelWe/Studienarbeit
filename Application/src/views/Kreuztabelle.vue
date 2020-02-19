@@ -1,0 +1,94 @@
+<template>
+  <div id="kreuztabelle">
+    <h1 class="is-size-2">
+      Tolle Kreuztabelle
+    </h1>
+    <table>
+      <tr>
+        <th>
+          Artikel
+        </th>
+        <th
+          v-for="(allergen, index) in allergene"
+          :key="index"
+          class="rotate"
+        >
+          <div>
+            <span>
+              {{ allergen }}
+            </span>
+          </div>
+        </th>
+      </tr>
+      <tr
+        v-for="(product, index) in getProducts"
+        :key="index"
+      >
+        <td>{{ product.Artikelbezeichnung }}</td>
+        <td
+          v-for="(allergen, i) in allergene"
+          :key="i"
+        >
+          <p v-if="allergenEnthalten(product.AllergeneAlle, i)">
+            X
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      allergene: ['Glutenhaltiges Getreide', 'Weizen', 'Roggen',
+        'Gerste', 'Hafer', 'Dinkel', 'Kamut', 'Emer', 'Schalentiere',
+        'Eier', 'Fisch', 'Erdnüsse', 'Soja', 'Milch und Milchprodukte',
+        'Schalenfrüchte', 'Mandeln', 'Haselnüsse', 'Walnüsse', 'Kaschu-/Cashewnüsse',
+        'Pecannüsse', 'Paranüsse', 'Pistazien', 'Macadamia-/Queenslandnüsse', 'Sellerie',
+        'Senf', 'Sesam', 'Schwefeldioxid und Sulfite', 'Lupine und Lupinenerzeugnisse',
+        'Weichtiere und Weichtiererzeugnisse',
+      ],
+    };
+  },
+  computed: {
+    getProducts() {
+      return this.$store.getters.getProducts;
+    },
+  },
+  methods: {
+    allergenEnthalten(allergene, index) {
+      return allergene.includes(this.allergene[index]);
+    },
+  },
+};
+</script>
+
+<style scoped>
+th.rotate {
+  height: 140px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform:
+    translate(25px, 51px)
+    rotate(315deg);
+  width: 30px;
+}
+th.rotate > div > span {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+}
+table {
+  text-align: left;
+  position: relative;
+  border-collapse: collapse;
+}
+th {
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+</style>

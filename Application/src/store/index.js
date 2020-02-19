@@ -28,13 +28,18 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    getProducts: (state) => state.products,
     getProductByArtNr: (state) => (ArtNr) => state.products.find(
       (product) => product.ArtNr === ArtNr,
     ),
     getImageByArtNr: (state) => (ArtNr) => {
       const image = state.images.find((img) => img.ArtNr === ArtNr);
       if (image === undefined) {
-        return state.images.find((img) => img.ArtNr === 'default').url;
+        try {
+          return state.images.find((img) => img.ArtNr === 'default').url;
+        } catch (e) {
+          return null;
+        }
       }
       return image.url;
     },

@@ -16,7 +16,7 @@
         </router-link>
       </div>
       <div class="column has-text-centered">
-        <router-link :to="{name: 'products'}">
+        <router-link :to="{name: 'kreuztabelle'}">
           <button class="button">
             Allergene
           </button>

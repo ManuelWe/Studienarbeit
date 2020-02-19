@@ -12,7 +12,7 @@
  * See https://goo.gl/2aRDsh
  */
 
-workbox.setConfig({ debug: true });
+workbox.setConfig({ debug: true }); //TODO entfernen
 
 workbox.core.setCacheNameDetails({ prefix: "kundeninformationssystem" });
 

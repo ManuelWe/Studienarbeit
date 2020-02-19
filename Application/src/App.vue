@@ -18,13 +18,19 @@ export default {
   components: {
     Footer,
   },
-  // for github pages; hack to enable routes for spa
   mounted() {
+    // for github pages; hack to enable routes for spa
     const path = localStorage.getItem('path');
     if (path) {
       localStorage.removeItem('path');
       this.$router.replace(path);
     }
+
+    // import font awesome script
+    const faScript = document.createElement('script');
+    faScript.setAttribute('src', 'https://use.fontawesome.com/releases/v5.3.1/js/all.js');
+    faScript.setAttribute('SameSite', 'none Secure');
+    document.head.appendChild(faScript);
   },
 };
 </script>
