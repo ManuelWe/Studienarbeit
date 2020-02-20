@@ -3,6 +3,24 @@
     <h1 class="is-size-1">
       {{ product.Artikelbezeichnung }}
     </h1>
+    <button
+      :disabled="getFilteredProducts[0].fields.ArtNr === ArtNr"
+      class="button returnButton"
+      @click="lastProduct()"
+    >
+      <span class="icon is-small">
+        <i class="fas fa-arrow-left fa-2x" />
+      </span>
+    </button>
+    <button
+      :disabled="getFilteredProducts[getFilteredProducts.length - 1].fields.ArtNr === ArtNr"
+      class="button returnButton"
+      @click="nextProduct()"
+    >
+      <span class="icon is-small">
+        <i class="fas fa-arrow-right fa-2x" />
+      </span>
+    </button>
     <h2
       v-if="product.Produktinfo"
       class="is-size-2"
@@ -169,12 +187,40 @@ export default {
     getProduct() {
       return this.$store.getters.getProductByArtNr;
     },
+    getFilteredProducts() {
+      return this.$store.getters.getFilteredProducts;
+    },
     getImage() {
       return this.$store.getters.getImageByArtNr;
     },
   },
   created() {
     this.product = this.getProduct(this.ArtNr);
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.ArtNr = to.params.ArtNr;
+    this.product = this.getProduct(this.ArtNr);
+    next();
+  },
+  methods: {
+    lastProduct() {
+      const productIndex = this.getFilteredProducts.findIndex((x) => x.fields.ArtNr === this.ArtNr);
+      this.$router.replace({
+        name: 'product',
+        params: {
+          ArtNr: this.getFilteredProducts[productIndex - 1].fields.ArtNr,
+        },
+      });
+    },
+    nextProduct() {
+      const productIndex = this.getFilteredProducts.findIndex((x) => x.fields.ArtNr === this.ArtNr);
+      this.$router.replace({
+        name: 'product',
+        params: {
+          ArtNr: this.getFilteredProducts[productIndex + 1].fields.ArtNr,
+        },
+      });
+    },
   },
 };
 </script>

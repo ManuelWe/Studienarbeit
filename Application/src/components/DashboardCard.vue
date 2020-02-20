@@ -3,6 +3,7 @@
     <router-link
       class="router-link"
       :to="{name: 'products'}"
+      aria-label="Produkte"
     >
       <div class="card">
         <div class="card-image">

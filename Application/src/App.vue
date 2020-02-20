@@ -1,11 +1,20 @@
 <template>
   <div id="app">
     <section class="section">
+      <button
+        v-if="$router.app._route.name !== 'dashboard'"
+        class="button returnButton"
+        @click="lastPage()"
+      >
+        <span class="icon is-small">
+          <i class="fas fa-arrow-left fa-2x" />
+        </span>
+      </button>
       <div class="container">
-        <Footer />
         <main role="main">
           <router-view />
         </main>
+        <Footer />
       </div>
     </section>
   </div>
@@ -25,12 +34,17 @@ export default {
       localStorage.removeItem('path');
       this.$router.replace(path);
     }
-
-    // import font awesome script
-    const faScript = document.createElement('script');
-    faScript.setAttribute('src', 'https://use.fontawesome.com/releases/v5.3.1/js/all.js');
-    faScript.setAttribute('SameSite', 'none Secure');
-    document.head.appendChild(faScript);
+  },
+  methods: {
+    lastPage() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
+
+<style scoped>
+.returnButton {
+  position: absolute;
+}
+</style>

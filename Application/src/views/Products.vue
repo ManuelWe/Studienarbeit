@@ -1,15 +1,20 @@
 <template>
   <div id="products">
     <b-field horizontal>
-      <b-input
-        v-model="searchString"
-        placeholder="Search..."
-        type="search"
-        icon-pack="fas"
-        icon="search"
-      >
-        />
-      </b-input>
+      <p class="control has-icons-left">
+        <input
+          v-model="searchString"
+          class="input"
+          aria-label="Suchfeld"
+          placeholder="Search..."
+          type="search"
+          icon-pack="fas"
+          icon="search"
+        >
+        <span class="icon is-left">
+          <i class="fas fa-search fa-2x" />
+        </span>
+      </p>
       <p class="control">
         <b-dropdown
           v-model="selectedFilters"
@@ -65,6 +70,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 import ProductCard from '../components/ProductCard.vue';
 import ProductsService from '../services/ProductsService';
 import ImagesService from '../services/ImagesService';
+import store from '../store/index';
 
 export default {
   components: {
@@ -129,6 +135,10 @@ export default {
           return productContained;
         });
       }
+      this.$store.dispatch('saveFilteredProducts', filteredProducts);
+      this.$store.dispatch('saveFilters', {
+        searchString: this.searchString, filters: this.selectedFilters,
+      });
       return filteredProducts;
     },
   },
@@ -142,6 +152,17 @@ export default {
         this.productsDisplayed = this.filteredProducts.length;
       }
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    if (from.name === 'product') {
+      const existingFilters = store.getters.getFilters;
+      next((vm) => {
+        vm.searchString = existingFilters.searchString; // eslint-disable-line no-param-reassign
+        vm.selectedFilters = existingFilters.filters; // eslint-disable-line no-param-reassign
+      });
+    } else {
+      next();
+    }
   },
   created() {
     this.getProducts();

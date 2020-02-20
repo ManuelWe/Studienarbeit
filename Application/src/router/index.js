@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Dashboard from '../views/Dashboard.vue';
-import Products from '../views/Products.vue';
-import Product from '../views/Product.vue';
-import Kreuztabelle from '../views/Kreuztabelle.vue';
-import Default404 from '../views/Default404.vue';
+
+const Dashboard = () => import('../views/Dashboard.vue');
+const Products = () => import('../views/Products.vue');
+const Product = () => import('../views/Product.vue');
+const Kreuztabelle = () => import('../views/Kreuztabelle.vue');
+const Default404 = () => import('../views/Default404.vue');
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,10 @@ const routes = [
     path: '/produkte/:ArtNr',
     name: 'product',
     component: Product,
+    beforeEnter(from, to, next) {
+      console.log('here');
+      next();
+    },
   },
   {
     path: '/kreuztabelle',
