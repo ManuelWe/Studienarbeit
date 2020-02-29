@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <section class="section">
+    <router-view name="landingPage" />
+    <section
+      v-if="$router.app._route.name !== 'landingPage'"
+      class="section"
+    >
       <button
         v-if="$router.app._route.name !== 'dashboard'"
         class="button returnButton"
-        @click="lastPage()"
+        @click="previousPage()"
       >
         <span class="icon is-small">
           <i class="fas fa-arrow-left fa-2x" />
@@ -14,7 +18,7 @@
         <main role="main">
           <router-view />
         </main>
-        <Footer />
+        <Footer v-if="$router.app._route.name !== 'landingPage'" />
       </div>
     </section>
   </div>
@@ -36,7 +40,7 @@ export default {
     }
   },
   methods: {
-    lastPage() {
+    previousPage() {
       this.$router.go(-1);
     },
   },
@@ -44,6 +48,12 @@ export default {
 </script>
 
 <style scoped>
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .returnButton {
   position: absolute;
 }
