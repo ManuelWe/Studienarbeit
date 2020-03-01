@@ -32,6 +32,8 @@ export default {
     Footer,
   },
   mounted() {
+    this.inactivityTimer();
+
     // for github pages; hack to enable routes for spa
     const path = localStorage.getItem('path');
     if (path) {
@@ -42,6 +44,26 @@ export default {
   methods: {
     previousPage() {
       this.$router.go(-1);
+    },
+    inactivityTimer() {
+      let time;
+      const localThis = this;
+
+      function redirect() {
+        if (localThis.$router.app._route.name !== 'landingPage') { // eslint-disable-line
+          localThis.$router.push({ name: 'landingPage' });
+        }
+      }
+
+      function resetTimer() {
+        clearTimeout(time);
+        time = setTimeout(redirect, 20000); // TODO: check time
+      }
+
+      window.onload = resetTimer;
+      // DOM Events
+      document.onmousemove = resetTimer;
+      document.onkeypress = resetTimer;
     },
   },
 };

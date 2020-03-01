@@ -32,10 +32,6 @@ const routes = [
     path: '/produkte/:ArtNr',
     name: 'product',
     component: Product,
-    beforeEnter(from, to, next) {
-      console.log('here');
-      next();
-    },
   },
   {
     path: '/kreuztabelle',

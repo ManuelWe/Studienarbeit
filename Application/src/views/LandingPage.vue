@@ -17,9 +17,49 @@
   </router-link>
 </template>
 
+<script>
+import ProductsService from '../services/ProductsService';
+import ImagesService from '../services/ImagesService';
+import ApiVersionService from '../services/ApiVersionService';
+
+export default {
+  created() {
+    setInterval(() => this.getApiVersion(), 1000); // TODO: check timing
+  },
+  methods: {
+    getApiVersion() {
+      ApiVersionService.getApiVersion().then((response) => {
+        const apiVersion = response.data.fields.version;
+        if (localStorage.getItem('apiVersion') === null) {
+          localStorage.setItem('apiVersion', apiVersion);
+        } else if (localStorage.getItem('apiVersion') < apiVersion) {
+          this.getProducts();
+          this.getImages();
+          localStorage.setItem('apiVersion', apiVersion);
+        }
+      }).catch((e) => console.log(e));
+    },
+    getProducts() {
+      ProductsService.getProducts().then((response) => {
+        this.$store.dispatch('saveProducts', response.data.items);
+      });
+    },
+    getImages() {
+      ImagesService.getImages().then((response) => {
+        const imagesArray = [];
+        response.data.items.forEach((image) => {
+          imagesArray.push({ ArtNr: image.fields.title, url: image.fields.file.url });
+        });
+        this.$store.dispatch('saveImages', imagesArray);
+      });
+    },
+  },
+};
+</script>
+
 <style scoped>
 .wrapper {
-  background-image: url(http://images.ctfassets.net/kfibk3xh1vwb/50Rg8FNwpVwosH38jvbfNa/3a67b516fc1ac65224f13470322d7b60/filename_english.jpg) ;
+  background-image: url(https://images.ctfassets.net/kfibk3xh1vwb/5KLSxiI4gh36GiMAanN4JK/25097d4b65234f79b19ace82050c14ad/ales-krivec-QnNqGoCnBg0-unsplash.jpg) ;
   background-position: center center;
   background-repeat:  no-repeat;
   background-attachment: fixed;

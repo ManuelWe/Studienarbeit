@@ -2,7 +2,7 @@
   <div>
     <router-link
       class="router-link"
-      :to="{name: 'products'}"
+      :to="{name: category.link}"
       aria-label="Produkte"
     >
       <div class="card">
@@ -10,14 +10,14 @@
           <figure class="image is-3by2">
             <img
               class="cardImage"
-              src="https://unsplash.it/300/200/?random&pic=1"
-              alt=""
+              :src="category.image"
+              :alt="category"
             >
           </figure>
         </div>
         <footer class="card-footer">
           <a class="card-footer-item">
-            {{ category }}
+            {{ category.name }}
           </a>
         </footer>
       </div>
@@ -29,7 +29,7 @@
 export default {
   props: {
     category: {
-      type: String,
+      type: Object,
       required: true,
     },
   },

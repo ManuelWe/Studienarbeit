@@ -21,15 +21,15 @@
         </th>
       </tr>
       <tr
-        v-for="(product, index) in getProducts"
+        v-for="(product, index) in products"
         :key="index"
       >
-        <td>{{ product.Artikelbezeichnung }}</td>
+        <td>{{ product.fields.Artikelbezeichnung }}</td>
         <td
           v-for="(allergen, i) in allergene"
           :key="i"
         >
-          <p v-if="allergenEnthalten(product.AllergeneAlle, i)">
+          <p v-if="allergenEnthalten(product.fields.AllergeneAlle, i)">
             X
           </p>
         </td>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import ProductsService from '../services/ProductsService';
+
 export default {
   data() {
     return {
@@ -50,16 +52,20 @@ export default {
         'Senf', 'Sesam', 'Schwefeldioxid und Sulfite', 'Lupine und Lupinenerzeugnisse',
         'Weichtiere und Weichtiererzeugnisse',
       ],
+      products: [],
     };
   },
-  computed: {
-    getProducts() {
-      return this.$store.getters.getProducts;
-    },
+  created() {
+    this.getProducts();
   },
   methods: {
     allergenEnthalten(allergene, index) {
       return allergene.includes(this.allergene[index]);
+    },
+    getProducts() {
+      ProductsService.getProducts().then((response) => {
+        this.products = response.data.items;
+      });
     },
   },
 };
