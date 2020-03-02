@@ -4,7 +4,7 @@
     :to="{name: 'dashboard'}"
     aria-label="Dashboard"
   >
-    <div class="wrapper">
+    <section class="hero is-info is-fullheight">
       <div class="message">
         <h1 class="is-size-1">
           Kundeninformationssystem
@@ -13,7 +13,7 @@
           Tippen um zu beginnen
         </h2>
       </div>
-    </div>
+    </section>
   </router-link>
 </template>
 
@@ -58,13 +58,12 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  background-image: url(https://images.ctfassets.net/kfibk3xh1vwb/5KLSxiI4gh36GiMAanN4JK/25097d4b65234f79b19ace82050c14ad/ales-krivec-QnNqGoCnBg0-unsplash.jpg) ;
-  background-position: center center;
-  background-repeat:  no-repeat;
-  background-attachment: fixed;
-  background-size:  cover;
-  background-color: #999;
+.hero.is-info {
+  background: url(https://images.ctfassets.net/kfibk3xh1vwb/5KLSxiI4gh36GiMAanN4JK/25097d4b65234f79b19ace82050c14ad/ales-krivec-QnNqGoCnBg0-unsplash.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 div{
@@ -72,12 +71,6 @@ div{
   padding: 0;
   font-family: exo, sans-serif;
 }
-
-.wrapper {
-  height: 100%;
-  width: 100%;
-}
-
 .message {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
