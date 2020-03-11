@@ -20,7 +20,7 @@ jobs:
       working-directory: ./Application
 
   release:
-    if: ${{ github.ref == 'master' }}
+    if: github.ref == 'refs/heads/master'
     needs: build
     name: deploy
     runs-on: ubuntu-latest
