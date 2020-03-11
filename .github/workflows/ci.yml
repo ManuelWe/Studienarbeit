@@ -32,6 +32,9 @@ jobs:
       uses: actions/checkout@v2
       with:
         persist-credentials: false
+    - name: Build frontend
+      run: npm run build
+      working-directory: ./Application
     - name: bash
       run: ls
       working-directory: ./Application
