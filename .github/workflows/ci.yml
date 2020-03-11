@@ -21,6 +21,14 @@ jobs:
     - name: bash
       run: ls
       working-directory: ./Application
+    - name: deploy dist
+      uses: JamesIves/github-pages-deploy-action@3.4.1
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: master
+        FOLDER: Application/dist
+        REPOSITORY_NAME: ManuelWe/ManuelWe.github.io
+        DEBUG: true
 
   release:
     if: github.ref == 'refs/heads/master'
