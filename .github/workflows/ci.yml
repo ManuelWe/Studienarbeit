@@ -46,7 +46,7 @@ jobs:
     - name: bash
       run: ls
       working-directory: ./Application
-    - name: deploy distt
+    - name: deploy dist
       uses: JamesIves/github-pages-deploy-action@3.4.1
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
