@@ -1,7 +1,7 @@
 name: Continuous integration
 on: [push]
 jobs:
-  all:
+  build:
     name: build
     runs-on: ubuntu-latest
     steps:
@@ -12,6 +12,22 @@ jobs:
     - name: Install frontend requirements
       run: npm ci
       working-directory: ./Application
+    - name: Lint frontend
+      run: npm run lint
+      working-directory: ./Application
     - name: Build frontend
       run: npm run build
       working-directory: ./Application
+
+  release:
+    if: ${{ github.ref == 'master' }}
+    needs: build
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploy docs
+      uses: ./Application/dist
+      with:
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        remote_url: https://github.com/ManuelWe/ManuelWe.github.io.git
