@@ -18,6 +18,8 @@ jobs:
     - name: Build frontend
       run: npm run build
       working-directory: ./Application
+    - name: bash
+      run: ls
 
   release:
     if: github.ref == 'refs/heads/master'
