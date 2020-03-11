@@ -1,5 +1,7 @@
 # kundeninformationssystem
 
+![](https://github.com/ManuelWe/Studienarbeit/workflows/Continuous%20integration/badge.svg)
+
 ## Project setup
 ```
 npm install
