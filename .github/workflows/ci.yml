@@ -20,37 +20,6 @@ jobs:
     - name: Build frontend
       run: npm run build
       working-directory: ./Application
-    - name: bash
-      run: ls
-      working-directory: ./Application
-    - name: deploy dist1
-      uses: JamesIves/github-pages-deploy-action@3.4.1
-      with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: master
-        FOLDER: Application/dist
-        REPOSITORY_NAME: ManuelWe/ManuelWe.github.io
-        DEBUG: true
-
-  release:
-    if: github.ref == 'refs/heads/master'
-    needs: build
-    name: deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout
-      uses: actions/checkout@v2
-      with:
-        persist-credentials: false
-    - name: Build frontend
-      run: npm run build
-      working-directory: ./Application
-    - name: bash
-      run: ls
-      working-directory: ./Application
-    - name: Install rsync 📚
-      run: |
-         apt-get update && apt-get install -y rsync
     - name: deploy dist
       uses: JamesIves/github-pages-deploy-action@3.4.1
       with:
