@@ -1,0 +1,17 @@
+name: Continuous integration
+on: [push]
+jobs:
+  all:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Node
+      uses: actions/setup-node@v1
+    - name: Install frontend requirements
+      run: npm ci
+      working-directory: ./Application
+    - name: Build frontend
+      run: npm run build
+      working-directory: ./Application
