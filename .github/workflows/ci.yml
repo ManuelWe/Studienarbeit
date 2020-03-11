@@ -29,11 +29,13 @@ jobs:
       uses: actions/checkout@v2
       with:
         persist-credentials: false
+    - name: bash
+      run: ls
     - name: deploy dist
       uses: JamesIves/github-pages-deploy-action@3.4.1
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: master
-        FOLDER: ./Application/dist
+        FOLDER: Application/dist
         REPOSITORY_NAME: ManuelWe/ManuelWe.github.io
         DEBUG: true
