@@ -20,6 +20,7 @@ jobs:
       working-directory: ./Application
     - name: bash
       run: ls
+      working-directory: ./Application
 
   release:
     if: github.ref == 'refs/heads/master'
@@ -33,6 +34,7 @@ jobs:
         persist-credentials: false
     - name: bash
       run: ls
+      working-directory: ./Application
     - name: deploy dist
       uses: JamesIves/github-pages-deploy-action@3.4.1
       with:
