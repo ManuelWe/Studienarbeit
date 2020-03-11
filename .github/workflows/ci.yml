@@ -30,7 +30,7 @@ jobs:
       with:
         persist-credentials: false
     - name: deploy dist
-      uses: ./
+      uses: appleboy/gh-pages-action@v0.0.2
       with:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
