@@ -184,7 +184,6 @@ export default {
     },
     getProducts() {
       ProductsService.getProducts().then((response) => {
-        console.log(response);
         this.products = response.data.items;
         this.sortProducts();
         this.productsDisplayed = 12;

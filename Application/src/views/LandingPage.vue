@@ -37,7 +37,11 @@ export default {
           this.getImages();
           localStorage.setItem('apiVersion', apiVersion);
         }
-      }).catch((e) => console.log(e));
+      }).catch((e) => this.$buefy.toast.open({
+        duration: 4000,
+        message: e,
+        type: 'is-danger',
+      }));
     },
     getProducts() {
       ProductsService.getProducts().then((response) => {
