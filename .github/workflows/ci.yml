@@ -30,9 +30,10 @@ jobs:
       with:
         persist-credentials: false
     - name: deploy dist
-      uses: JamesIves/github-pages-deploy-action@3.4.1
+      uses: appleboy/gh-pages-action@v0.0.2
       with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: master
-        FOLDER: dist
-        REPOSITORY_NAME: ManuelWe/ManuelWe.github.io
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        target_branch: master
+        pages_directory: dist
+        remote_url: https://github.com/ManuelWe/ManuelWe.github.io.git
