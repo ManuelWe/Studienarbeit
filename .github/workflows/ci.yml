@@ -30,7 +30,7 @@ jobs:
       with:
         persist-credentials: false
     - name: deploy dist
-      uses: ./Application/dist
+      uses: ./
       with:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
