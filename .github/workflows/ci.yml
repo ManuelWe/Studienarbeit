@@ -25,7 +25,9 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-    - name: deploy docs
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: deploy dist
       uses: ./Application/dist
       with:
         username: ${{ secrets.USERNAME }}
