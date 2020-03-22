@@ -2,11 +2,11 @@
   <div id="app">
     <router-view name="landingPage" />
     <section
-      v-if="$router.app._route.name !== 'landingPage'"
+      v-if="$route.name !== 'landingPage'"
       class="section"
     >
       <button
-        v-if="$router.app._route.name !== 'dashboard'"
+        v-if="$route.name !== 'dashboard'"
         class="button returnButton"
         @click="previousPage()"
       >
@@ -14,11 +14,17 @@
           <i class="fas fa-arrow-left fa-2x" />
         </span>
       </button>
+      <h4
+        v-show="showTimer"
+        class="is-pulled-right has-text-danger is-size-4"
+      >
+        {{ timer }}
+      </h4>
       <div class="container">
         <main role="main">
           <router-view />
         </main>
-        <Footer v-if="$router.app._route.name !== 'landingPage'" />
+        <Footer v-if="$route.name !== 'landingPage'" />
       </div>
     </section>
   </div>
@@ -33,6 +39,12 @@ import Footer from './components/Footer.vue';
 export default {
   components: {
     Footer,
+  },
+  data() {
+    return {
+      timer: 25, // TODO: check time
+      showTimer: false,
+    };
   },
   created() {
     setInterval(() => this.getApiVersion(), 1000); // TODO: check timing
@@ -52,19 +64,28 @@ export default {
       this.$router.go(-1);
     },
     inactivityTimer() {
-      let time;
-      const localThis = this;
-
-      function redirect() {
-        if (localThis.$router.app._route.name !== 'landingPage') { // eslint-disable-line
-          localThis.$router.push({ name: 'landingPage' });
+      const redirect = () => {
+        if (this.$route.name !== 'landingPage') {
+          this.$router.push({ name: 'landingPage' });
         }
-      }
+      };
 
-      function resetTimer() {
-        clearTimeout(time);
-        time = setTimeout(redirect, 20000); // TODO: check time
-      }
+      const resetTimer = () => {
+        this.timer = 25; // TODO: check time
+        this.showTimer = false;
+      };
+
+      setInterval(() => {
+        if (this.$route.name !== 'landingPage') {
+          this.timer -= 1;
+          if (this.timer < 10) {
+            this.showTimer = true;
+            if (this.timer === 0) {
+              redirect();
+            }
+          }
+        }
+      }, 1000);
 
       window.onload = resetTimer;
       // DOM Events
