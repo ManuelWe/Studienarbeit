@@ -7,7 +7,7 @@
     <section class="hero is-info is-fullheight">
       <div class="message">
         <h1 class="is-size-1">
-          Kundeninformationssystem
+          Kundeninformationssystem v1.0.0
         </h1>
         <h2 class="is-size-3">
           Tippen um zu beginnen
