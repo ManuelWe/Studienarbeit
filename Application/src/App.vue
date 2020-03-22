@@ -25,11 +25,17 @@
 </template>
 
 <script>
+import ProductsService from '@/services/ProductsService';
+import ImagesService from '@/services/ImagesService';
+import ApiVersionService from '@/services/ApiVersionService';
 import Footer from './components/Footer.vue';
 
 export default {
   components: {
     Footer,
+  },
+  created() {
+    setInterval(() => this.getApiVersion(), 1000); // TODO: check timing
   },
   mounted() {
     this.inactivityTimer();
@@ -64,6 +70,36 @@ export default {
       // DOM Events
       document.onmousemove = resetTimer;
       document.onkeypress = resetTimer;
+    },
+    getApiVersion() {
+      ApiVersionService.getApiVersion().then((response) => {
+        const apiVersion = response.data.fields.version;
+        if (localStorage.getItem('apiVersion') === null) {
+          localStorage.setItem('apiVersion', apiVersion);
+        } else if (localStorage.getItem('apiVersion') < apiVersion) {
+          this.getProducts();
+          this.getImages();
+          localStorage.setItem('apiVersion', apiVersion);
+        }
+      }).catch((e) => this.$buefy.toast.open({
+        duration: 4000,
+        message: e,
+        type: 'is-danger',
+      }));
+    },
+    getProducts() {
+      ProductsService.getProducts().then((response) => {
+        this.$store.dispatch('saveProducts', response.data.items);
+      });
+    },
+    getImages() {
+      ImagesService.getImages().then((response) => {
+        const imagesArray = [];
+        response.data.items.forEach((image) => {
+          imagesArray.push({ ArtNr: image.fields.title, url: image.fields.file.url });
+        });
+        this.$store.dispatch('saveImages', imagesArray);
+      });
     },
   },
 };
