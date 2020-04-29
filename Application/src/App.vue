@@ -14,12 +14,12 @@
           <i class="fas fa-arrow-left fa-2x" />
         </span>
       </button>
-      <h4
-        v-show="showTimer"
-        class="is-pulled-right has-text-danger is-size-4"
+      <span
+        class="is-pulled-right is-size-4"
       >
-        {{ timer }}
-      </h4>
+        <i class="fas fa-history" />
+        <span> {{ displayedTime }}</span>
+      </span>
       <div class="container">
         <main role="main">
           <router-view />
@@ -27,6 +27,31 @@
         <Footer v-if="$route.name !== 'landingPage'" />
       </div>
     </section>
+    <b-modal
+      :active.sync="showTimeoutModal"
+      has-modal-card
+      aria-role="dialog"
+      aria-modal
+    >
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">
+            Rückkehr zur Startseite
+          </p>
+        </header>
+        <section class="modal-card-body">
+          Zurück zur Startseite in 20 Sekunden!
+        </section>
+        <footer class="modal-card-foot">
+          <button
+            class="button is-info"
+            @click="showTimeoutModal = false"
+          >
+            Noch nicht
+          </button>
+        </footer>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -42,9 +67,10 @@ export default {
   },
   data() {
     return {
-      timerLength: 25, // TODO: check time
+      timerLength: 180, // TODO: check time
       timer: this.timerLength,
-      showTimer: false,
+      displayedTime: 3, // TODO: check time (Math.trunc(timerLength / 60))
+      showTimeoutModal: false,
     };
   },
   created() {
@@ -67,21 +93,24 @@ export default {
     inactivityTimer() {
       const redirect = () => {
         if (this.$route.name !== 'landingPage') {
+          this.showTimeoutModal = false;
           this.$router.push({ name: 'landingPage' });
         }
       };
 
       const resetTimer = () => {
         this.timer = this.timerLength;
-        this.showTimer = false;
       };
 
       setInterval(() => {
         if (this.$route.name !== 'landingPage') {
           this.timer -= 1;
-          if (this.timer < 10) {
-            this.showTimer = true;
-            if (this.timer === 0) {
+          this.displayedTime = Math.trunc(this.timer / 60) + 1;
+          if (this.timer < 61) {
+            this.displayedTime = this.timer;
+            if (this.timer === 21) {
+              this.showTimeoutModal = true;
+            } else if (this.timer === 0) {
               redirect();
             }
           }
@@ -136,5 +165,9 @@ export default {
 
 .returnButton {
   position: absolute;
+}
+
+.modal-card-foot {
+  justify-content: flex-end;
 }
 </style>
