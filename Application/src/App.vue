@@ -42,7 +42,8 @@ export default {
   },
   data() {
     return {
-      timer: 25, // TODO: check time
+      timerLength: 25, // TODO: check time
+      timer: this.timerLength,
       showTimer: false,
     };
   },
@@ -71,7 +72,7 @@ export default {
       };
 
       const resetTimer = () => {
-        this.timer = 25; // TODO: check time
+        this.timer = this.timerLength;
         this.showTimer = false;
       };
 
