@@ -79,7 +79,7 @@ export default {
   mounted() {
     this.inactivityTimer();
 
-    // for github pages; hack to enable routes for spa
+    // hack to enable routes for spa when deployed to github pages
     const path = localStorage.getItem('path');
     if (path) {
       localStorage.removeItem('path');
@@ -118,7 +118,6 @@ export default {
       }, 1000);
 
       window.onload = resetTimer;
-      // DOM Events
       document.onmousemove = resetTimer;
       document.onkeypress = resetTimer;
     },
