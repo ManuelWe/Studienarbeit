@@ -13,6 +13,10 @@
           Tippen um zu beginnen
         </h2>
       </div>
+      <img
+        id="touchIcon"
+        src="../../public/img/icons/touch.png"
+      >
     </section>
   </router-link>
 </template>
@@ -45,5 +49,14 @@ div{
   background-color: rgba(0,0,0,0.6);
   color: #fff;
   padding: 0.5em;
+}
+#touchIcon {
+  height: 6rem;
+  width: 6rem;
+  background-color: rgba(255, 255, 255, 0.849);
+  position:absolute;
+  bottom:0;
+  left:0;
+  margin:1.5rem;
 }
 </style>
