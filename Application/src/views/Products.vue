@@ -16,29 +16,14 @@
         </span>
       </p>
       <p class="control">
-        <b-dropdown
-          v-model="selectedFilters"
-          multiple
-          aria-role="list"
+        <button
+          class="button is-primary"
+          type="button"
+          @click="showFilterModal = true"
         >
-          <button
-            slot="trigger"
-            class="button is-primary"
-            type="button"
-          >
-            <span>Filter ({{ selectedFilters.length }})</span>
-            <b-icon icon="menu-down" />
-          </button>
-
-          <b-dropdown-item
-            v-for="(option, index) in filterOptions"
-            :key="index"
-            :value="option"
-            aria-role="listitem"
-          >
-            <span>{{ option }}</span>
-          </b-dropdown-item>
-        </b-dropdown>
+          <span>Filter ({{ selectedFilters.length }})</span>
+          <b-icon icon="menu-down" />
+        </button>
       </p>
       <p class="control">
         {{ filteredProducts.length }} Produkte
@@ -62,6 +47,47 @@
         <div slot="no-results" />
       </infinite-loading>
     </div>
+
+    <b-modal
+      :active.sync="showFilterModal"
+      has-modal-card
+      aria-role="dialog"
+      aria-modal
+    >
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">
+            Filter
+          </p>
+        </header>
+        <section class="modal-card-body">
+          <b-checkbox
+            v-for="(option, index) in filterOptions"
+            :key="index"
+            v-model="preselectedFilters"
+            :native-value="option"
+          >
+            {{ option }}
+          </b-checkbox>
+        </section>
+        <footer class="modal-card-foot">
+          <button
+            class="button is-text"
+            @click="showFilterModal = false
+                    preselectedFilters = selectedFilters"
+          >
+            Abbrechen
+          </button>
+          <button
+            class="button is-success"
+            @click="showFilterModal = false
+                    selectedFilters = preselectedFilters"
+          >
+            ({{ preFilteredProducts.length }}) Artikel anzeigen
+          </button>
+        </footer>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -82,8 +108,11 @@ export default {
       products: [],
       productsDisplayed: 0,
       searchString: '',
-      selectedFilters: [],
-      filterOptions: ['Ballaststoffarm X',
+      selectedFilters: [], // filters applied to products list
+      preselectedFilters: [], // filters selected in modal but not yet applied
+      showFilterModal: false,
+      filterOptions: [
+        'Ballaststoffarm X',
         'Ballaststoffreich X',
         'Bio X',
         'Dinkelbrot',
@@ -99,7 +128,8 @@ export default {
         'Vegan X',
         'Vollkorn X',
         'Weizenbrot',
-        'Zuckerfrei X'],
+        'Zuckerfrei X',
+      ],
     };
   },
   computed: {
@@ -116,22 +146,14 @@ export default {
       }
 
       if (this.selectedFilters.length) {
-        filteredProducts = filteredProducts.filter((e) => {
+        filteredProducts = filteredProducts.filter((product) => {
           let productContained = false;
-          this.selectedFilters.forEach((option) => {
-            if (option === 'Dinkelbrot') {
-              if (e.fields.Zutaten.toLowerCase().includes('dinkelmehl')) productContained = true;
+          for (let i = 0; i < this.selectedFilters.length; i += 1) {
+            if (this.checkContained(product, this.selectedFilters[i])) {
+              productContained = true;
+              break;
             }
-            if (option === 'Weizenbrot') { // TODO sinvolle option??????
-              if (e.fields.Zutaten.toLowerCase().includes('weizenmehl')) productContained = true;
-            }
-            if (option === 'Hefefrei') { // TODO sinvoll?
-              if (!e.fields.Zutaten.toLowerCase().includes('hefe')) productContained = true;
-            }
-            if (option === 'Urkorn') {
-              if (e.fields.Zutaten.toLowerCase().includes('urkorn')) productContained = true;
-            }
-          });
+          }
           return productContained;
         });
       }
@@ -139,6 +161,32 @@ export default {
       this.$store.dispatch('saveFilters', {
         searchString: this.searchString, filters: this.selectedFilters,
       });
+      return filteredProducts;
+    },
+    preFilteredProducts() {
+      const search = this.searchString.toLowerCase().trim();
+      let filteredProducts = [];
+
+      if (search) {
+        filteredProducts = this.products.filter(
+          (c) => c.fields.Artikelbezeichnung.toLowerCase().indexOf(search) > -1,
+        );
+      } else {
+        filteredProducts = this.products;
+      }
+
+      if (this.preselectedFilters.length) {
+        filteredProducts = filteredProducts.filter((product) => {
+          let productContained = false;
+          for (let i = 0; i < this.preselectedFilters.length; i += 1) {
+            if (this.checkContained(product, this.preselectedFilters[i])) {
+              productContained = true;
+              break;
+            }
+          }
+          return productContained;
+        });
+      }
       return filteredProducts;
     },
   },
@@ -181,6 +229,25 @@ export default {
       }
 
       this.products = this.products.sort(compare);
+    },
+    checkContained(product, filterOption) {
+      switch (filterOption) {
+        case 'Dinkelbrot':
+          if (product.fields.Zutaten.toLowerCase().includes('dinkelmehl')) return true;
+          break;
+        case 'Weizenbrot': // TODO sinvolle option??????
+          if (product.fields.Zutaten.toLowerCase().includes('weizenmehl')) return true;
+          break;
+        case 'Hefefrei': // TODO sinvoll?
+          if (!product.fields.Zutaten.toLowerCase().includes('hefe')) return true;
+          break;
+        case 'Urkorn':
+          if (product.fields.Zutaten.toLowerCase().includes('urkorn')) return true;
+          break;
+        default:
+          return false;
+      }
+      return false;
     },
     getProducts() {
       ProductsService.getProducts().then((response) => {

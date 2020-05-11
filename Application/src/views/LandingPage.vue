@@ -7,12 +7,16 @@
     <section class="hero is-info is-fullheight">
       <div class="message">
         <h1 class="is-size-1">
-          Kundeninformationssystem v1.0.0
+          Kundeninformationssystem
         </h1>
         <h2 class="is-size-3">
-          Tippen um zu beginnen
+          Alle Informationen zu Produkten und Allergenen
         </h2>
       </div>
+      <img
+        id="touchIcon"
+        src="../../public/img/icons/touch.png"
+      >
     </section>
   </router-link>
 </template>
@@ -36,7 +40,7 @@ div{
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  width: 55%;
+  width: 60%;
   height: 30%;
   top: 5rem;
   left: 2rem;
@@ -45,5 +49,13 @@ div{
   background-color: rgba(0,0,0,0.6);
   color: #fff;
   padding: 0.5em;
+}
+#touchIcon {
+  height: 6rem;
+  width: 6rem;
+  position:absolute;
+  bottom:0;
+  left:0;
+  margin:1.5rem;
 }
 </style>
