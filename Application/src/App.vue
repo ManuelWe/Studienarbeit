@@ -15,10 +15,10 @@
         </span>
       </button>
       <span
-        class="is-pulled-right is-size-4"
+        class="is-pulled-right is-size-6"
       >
         <i class="fas fa-history" />
-        <span> {{ displayedTime }}</span>
+        <span> {{ displayedTime }} </span>
       </span>
       <div class="container">
         <main role="main">
@@ -69,7 +69,7 @@ export default {
     return {
       timerLength: 180, // TODO: check time
       timer: this.timerLength,
-      displayedTime: 3, // TODO: check time (Math.trunc(timerLength / 60))
+      displayedTime: '3min', // TODO: check time (Math.trunc(timerLength / 60))
       showTimeoutModal: false,
     };
   },
@@ -105,9 +105,9 @@ export default {
       setInterval(() => {
         if (this.$route.name !== 'landingPage') {
           this.timer -= 1;
-          this.displayedTime = Math.trunc(this.timer / 60) + 1;
+          this.displayedTime = `${Math.trunc(this.timer / 60) + 1}min`;
           if (this.timer < 61) {
-            this.displayedTime = this.timer;
+            this.displayedTime = `${this.timer}s`;
             if (this.timer === 21) {
               this.showTimeoutModal = true;
             } else if (this.timer === 0) {
