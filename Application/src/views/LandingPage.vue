@@ -53,7 +53,6 @@ div{
 #touchIcon {
   height: 6rem;
   width: 6rem;
-  background-color: rgba(255, 255, 255, 0.849);
   position:absolute;
   bottom:0;
   left:0;
