@@ -48,6 +48,19 @@
       </infinite-loading>
     </div>
 
+    <button
+      v-show="showToTopButton"
+      id="toTopButton"
+      @click="goToTop()"
+    >
+      <span
+        class="icon is-small"
+        style="color: white"
+      >
+        <i class="fas fa-chevron-up fa-2x" />
+      </span>
+    </button>
+
     <b-modal
       :active.sync="showFilterModal"
       has-modal-card
@@ -105,6 +118,7 @@ export default {
   },
   data() {
     return {
+      showToTopButton: false,
       products: [],
       productsDisplayed: 0,
       searchString: '',
@@ -215,8 +229,19 @@ export default {
   created() {
     this.getProducts();
     this.getImages();
+    window.onscroll = () => {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        this.showToTopButton = true;
+      } else {
+        this.showToTopButton = false;
+      }
+    };
   },
   methods: {
+    goToTop() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    },
     sortProducts() {
       function compare(a, b) {
         if (a.fields.Artikelbezeichnung < b.fields.Artikelbezeichnung) {
@@ -281,3 +306,18 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#toTopButton {
+  background-color: rgba(0,0,0,0.6);
+  position: fixed;
+  border-style: solid;
+  border-color: black;
+  outline: none;
+  cursor: pointer;
+  bottom: 14%;
+  right: 3%;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+</style>
