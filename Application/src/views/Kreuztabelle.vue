@@ -1,9 +1,5 @@
 <template>
   <div id="kreuztabelle">
-    <h1 class="is-size-2">
-      Tolle Kreuztabelle
-    </h1>
-
     <b-field horizontal>
       <p class="control has-icons-left">
         <input
@@ -57,13 +53,19 @@
         </td>
       </tr>
     </table>
+
+    <goToTopButton />
   </div>
 </template>
 
 <script>
 import ProductsService from '../services/ProductsService';
+import goToTopButton from '../components/goToTopButton.vue';
 
 export default {
+  components: {
+    goToTopButton,
+  },
   data() {
     return {
       allergene: ['Glutenhaltiges Getreide', 'Weizen', 'Roggen',
@@ -112,8 +114,8 @@ th.rotate {
 
 th.rotate > div {
   transform:
-    translate(25px, 51px)
-    rotate(315deg);
+    translate(0, 5rem)
+    rotate(300deg);
   width: 30px;
 }
 th.rotate > div > span {

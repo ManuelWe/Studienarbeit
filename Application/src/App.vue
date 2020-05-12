@@ -1,32 +1,22 @@
 <template>
   <div id="app">
     <router-view name="landingPage" />
+
     <section
-      v-if="$route.name !== 'landingPage'"
+      v-if="$route.path !== '/'"
       class="section"
     >
-      <button
-        v-if="$route.name !== 'dashboard'"
-        class="button returnButton"
-        @click="previousPage()"
-      >
-        <span class="icon is-small">
-          <i class="fas fa-arrow-left fa-2x" />
-        </span>
-      </button>
-      <span
-        class="is-pulled-right is-size-6"
-      >
-        <i class="fas fa-history" />
-        <span> {{ displayedTime }} </span>
-      </span>
       <div class="container">
+        <Header
+          :displayed-time="displayedTime"
+        />
         <main role="main">
           <router-view />
         </main>
-        <Footer v-if="$route.name !== 'landingPage'" />
+        <Footer />
       </div>
     </section>
+
     <b-modal
       :active.sync="showTimeoutModal"
       has-modal-card
@@ -60,10 +50,12 @@ import ProductsService from '@/services/ProductsService';
 import ImagesService from '@/services/ImagesService';
 import ApiVersionService from '@/services/ApiVersionService';
 import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
 
 export default {
   components: {
     Footer,
+    Header,
   },
   data() {
     return {
@@ -87,9 +79,6 @@ export default {
     }
   },
   methods: {
-    previousPage() {
-      this.$router.go(-1);
-    },
     inactivityTimer() {
       const redirect = () => {
         if (this.$route.name !== 'landingPage') {
