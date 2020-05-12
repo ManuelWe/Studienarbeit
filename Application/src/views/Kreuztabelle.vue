@@ -3,6 +3,28 @@
     <h1 class="is-size-2">
       Tolle Kreuztabelle
     </h1>
+
+    <b-field horizontal>
+      <p class="control has-icons-left">
+        <input
+          v-model="searchString"
+          class="input"
+          aria-label="Suchfeld"
+          placeholder="Suche..."
+          type="search"
+          icon-pack="fas"
+          icon="search"
+          @change="filterProducts()"
+        >
+        <span class="icon is-left">
+          <i class="fas fa-search fa-2x" />
+        </span>
+      </p>
+      <p class="control">
+        {{ filteredProducts.length }} Produkte
+      </p>
+    </b-field>
+
     <table>
       <tr>
         <th>
@@ -21,7 +43,7 @@
         </th>
       </tr>
       <tr
-        v-for="(product, index) in products"
+        v-for="(product, index) in filteredProducts"
         :key="index"
       >
         <td>{{ product.fields.Artikelbezeichnung }}</td>
@@ -53,7 +75,18 @@ export default {
         'Weichtiere und Weichtiererzeugnisse',
       ],
       products: [],
+      searchString: '',
     };
+  },
+  computed: {
+    filteredProducts() {
+      return this.products.filter((product) => {
+        if (product.fields.Artikelbezeichnung.toLowerCase().includes(this.searchString)) {
+          return true;
+        }
+        return false;
+      });
+    },
   },
   created() {
     this.getProducts();

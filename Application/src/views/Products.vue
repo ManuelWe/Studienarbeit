@@ -6,7 +6,7 @@
           v-model="searchString"
           class="input"
           aria-label="Suchfeld"
-          placeholder="Search..."
+          placeholder="Suche..."
           type="search"
           icon-pack="fas"
           icon="search"
@@ -47,6 +47,8 @@
         <div slot="no-results" />
       </infinite-loading>
     </div>
+
+    <goToTopButton />
 
     <b-modal
       :active.sync="showFilterModal"
@@ -94,6 +96,7 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
 import ProductCard from '../components/ProductCard.vue';
+import goToTopButton from '../components/goToTopButton.vue';
 import ProductsService from '../services/ProductsService';
 import ImagesService from '../services/ImagesService';
 import store from '../store/index';
@@ -101,6 +104,7 @@ import store from '../store/index';
 export default {
   components: {
     ProductCard,
+    goToTopButton,
     InfiniteLoading,
   },
   data() {
