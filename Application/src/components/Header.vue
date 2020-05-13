@@ -46,9 +46,12 @@ export default {
     headerText() {
       if (this.$route.name === 'dashboard') return 'Übersicht';
       if (this.$route.name === 'products') return 'Backwaren';
-      if (this.$route.name === 'product') return 'Produkt Name??';
+      if (this.$route.name === 'product') return this.getProduct(this.$route.params.ArtNr).Artikelbezeichnung;
       if (this.$route.name === 'kreuztabelle') return 'Kreuztabelle';
       return '';
+    },
+    getProduct() {
+      return this.$store.getters.getProductByArtNr;
     },
   },
   methods: {
