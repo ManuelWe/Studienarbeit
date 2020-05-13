@@ -159,4 +159,8 @@ export default {
 .modal-card-foot {
   justify-content: flex-end;
 }
+
+.section {
+  padding-top: 1rem;
+}
 </style>
