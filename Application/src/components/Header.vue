@@ -1,5 +1,5 @@
 <template>
-  <b-navbar>
+  <b-navbar id="headerBar">
     <template slot="brand">
       <b-navbar-item tag="div">
         <button
@@ -61,3 +61,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#headerBar {
+  border-bottom: black;
+  border-width: 4px;
+  border-bottom-style: double;
+}
+</style>
