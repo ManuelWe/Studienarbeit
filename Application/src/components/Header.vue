@@ -1,5 +1,5 @@
 <template>
-  <b-navbar>
+  <b-navbar id="headerBar">
     <template slot="brand">
       <b-navbar-item tag="div">
         <button
@@ -46,9 +46,17 @@ export default {
     headerText() {
       if (this.$route.name === 'dashboard') return 'Übersicht';
       if (this.$route.name === 'products') return 'Backwaren';
-      if (this.$route.name === 'product') return 'Produkt Name??';
+      if (this.$route.name === 'product') {
+        const queriedProduct = this.getProduct(this.$route.params.ArtNr);
+        if (queriedProduct) { // if !queriedProduct it will redirect to products page anyways
+          return queriedProduct.Artikelbezeichnung;
+        }
+      }
       if (this.$route.name === 'kreuztabelle') return 'Kreuztabelle';
       return '';
+    },
+    getProduct() {
+      return this.$store.getters.getProductByArtNr;
     },
   },
   methods: {
@@ -58,3 +66,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#headerBar {
+  border-bottom: black;
+  border-width: 4px;
+  border-bottom-style: double;
+}
+</style>

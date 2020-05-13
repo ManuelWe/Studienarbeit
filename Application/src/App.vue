@@ -2,14 +2,15 @@
   <div id="app">
     <router-view name="landingPage" />
 
+    <Header
+      v-show="$route.path !== '/'"
+      :displayed-time="displayedTime"
+    />
     <section
       v-if="$route.path !== '/'"
       class="section"
     >
       <div class="container">
-        <Header
-          :displayed-time="displayedTime"
-        />
         <main role="main">
           <router-view />
         </main>
@@ -157,5 +158,9 @@ export default {
 
 .modal-card-foot {
   justify-content: flex-end;
+}
+
+.section {
+  padding-top: 1rem;
 }
 </style>

@@ -10,7 +10,6 @@
           type="search"
           icon-pack="fas"
           icon="search"
-          @change="filterProducts()"
         >
         <span class="icon is-left">
           <i class="fas fa-search fa-2x" />
@@ -83,7 +82,9 @@ export default {
   computed: {
     filteredProducts() {
       return this.products.filter((product) => {
-        if (product.fields.Artikelbezeichnung.toLowerCase().includes(this.searchString)) {
+        if (product.fields.Artikelbezeichnung.toLowerCase().includes(
+          this.searchString.toLowerCase(),
+        )) {
           return true;
         }
         return false;
