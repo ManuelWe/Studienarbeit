@@ -209,8 +209,10 @@ export default {
     if (from.name === 'product') {
       const existingFilters = store.getters.getFilters;
       next((vm) => {
-        vm.searchString = existingFilters.searchString; // eslint-disable-line no-param-reassign
-        vm.selectedFilters = existingFilters.filters; // eslint-disable-line no-param-reassign
+        if (existingFilters) {
+          vm.searchString = existingFilters.searchString; // eslint-disable-line no-param-reassign
+          vm.selectedFilters = existingFilters.filters; // eslint-disable-line no-param-reassign
+        }
       });
     } else {
       next();
