@@ -96,7 +96,7 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
 import ProductCard from '../components/ProductCard.vue';
-import goToTopButton from '../components/goToTopButton.vue';
+import goToTopButton from '../components/GoToTopButton.vue';
 import ProductsService from '../services/ProductsService';
 import ImagesService from '../services/ImagesService';
 import store from '../store/index';
