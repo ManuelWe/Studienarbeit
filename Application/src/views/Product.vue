@@ -16,21 +16,8 @@
       </button>
     </div>
     <div class="column is-10">
-      <h2
-        v-if="product.Produktinfo"
-        class="is-size-2"
-      >
-        {{ product.Produktinfo }}
-      </h2>
-      <h3 class="is-size-3">
-        Gewicht: {{ product.Artikelgewicht }}g
-      </h3>
-      <h5 class="is-size-5">
-        Zutaten:
-      </h5>
-      <p>{{ product.Zutaten }}</p>
       <div class="columns">
-        <div class="column">
+        <div class="column is-7">
           <figure class="image is-512x512">
             <img
               :src="getImage(ArtNr)"
@@ -38,15 +25,33 @@
           </figure>
         </div>
         <div class="column">
-          <NutritionalTable :product="product" />
+          <DayIndicator :baking-days="['Di', 'Sa']" />
+          <h2
+            v-if="product.Produktinfo"
+            class="is-size-5"
+          >
+            {{ product.Produktinfo }}
+          </h2>
+          <h3 class="is-size-5">
+            Gewicht: {{ product.Artikelgewicht }}g
+          </h3>
+          <h3 class="is-size-6">
+            Allergene: {{ product.AllergeneAlle }}
+          </h3>
+          <h3 class="is-size-6">
+            Zusatzstoffe: {{ product.ZusatzstoffeAlle }}
+          </h3>
         </div>
       </div>
-      <h4 class="is-size-4">
-        Allergene: {{ product.AllergeneAlle }}
-      </h4>
-      <h4 class="is-size-4">
-        Zusatzstoffe: {{ product.ZusatzstoffeAlle }}
-      </h4>
+
+      <h5 class="is-size-5">
+        Zutaten:
+      </h5>
+      <p>{{ product.Zutaten }}</p>
+
+      <div class="column">
+        <NutritionalTable :product="product" />
+      </div>
     </div>
     <div class="column">
       <button
@@ -64,10 +69,12 @@
 
 <script>
 import NutritionalTable from '@/components/NutritionalTable.vue';
+import DayIndicator from '@/components/DayIndicator.vue';
 
 export default {
   components: {
     NutritionalTable,
+    DayIndicator,
   },
   data() {
     return {

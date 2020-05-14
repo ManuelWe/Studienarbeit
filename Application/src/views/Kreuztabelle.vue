@@ -59,7 +59,7 @@
 
 <script>
 import ProductsService from '../services/ProductsService';
-import goToTopButton from '../components/goToTopButton.vue';
+import goToTopButton from '../components/GoToTopButton.vue';
 
 export default {
   components: {
