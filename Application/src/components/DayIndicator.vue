@@ -11,7 +11,7 @@
         v-for="(day, index) in days"
         :key="index"
         class="control circle is-size-6"
-        :style="{'background-color': checkContained(day)?'rgb(255, 89, 89)':'rgb(221, 221, 221)'}"
+        :style="{'background-color': checkContained(day)?'rgb(50, 252, 60)':'rgb(252, 56, 56)'}"
       >{{ day }}</span>
     </div>
   </div>
@@ -44,14 +44,14 @@ export default {
 
 <style scoped>
 .circle {
-  height: 35px;
+  height: 30px;
   width: 30px;
   background-color: rgb(221, 221, 221);
   border-radius: 50%;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  line-height: 35px;       /* The same as height */
+  line-height: 30px;       /* The same as height */
   font-size: 30px;
 }
 #circleWrapper {

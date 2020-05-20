@@ -1,8 +1,8 @@
 <template>
   <router-link
     class="router-link"
-    :to="{name: 'dashboard'}"
-    aria-label="Dashboard"
+    :to="{name: 'products'}"
+    aria-label="Produkte"
   >
     <section class="hero is-info is-fullheight">
       <div class="message">

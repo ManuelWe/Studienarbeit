@@ -3,11 +3,11 @@
     <template slot="brand">
       <b-navbar-item tag="div">
         <button
-          :style="{visibility: $route.name !== 'dashboard' ? 'visible':'hidden'}"
-          class="button returnButton"
+          :style="{visibility: $route.name === 'product' ? 'visible':'hidden'}"
+          class="button is-medium returnButton"
           @click="previousPage()"
         >
-          <span class="icon is-small">
+          <span class="icon">
             <i class="fas fa-arrow-left fa-2x" />
           </span>
         </button>
@@ -15,7 +15,7 @@
     </template>
     <template slot="start">
       <b-navbar-item tag="div">
-        <h1 class="is-size-3">
+        <h1 class="is-size-2">
           {{ headerText }}
         </h1>
       </b-navbar-item>
@@ -44,7 +44,6 @@ export default {
   },
   computed: {
     headerText() {
-      if (this.$route.name === 'dashboard') return 'Übersicht';
       if (this.$route.name === 'products') return 'Backwaren';
       if (this.$route.name === 'product') {
         const queriedProduct = this.getProduct(this.$route.params.ArtNr);

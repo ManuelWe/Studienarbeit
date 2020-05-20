@@ -3,16 +3,6 @@
     <div class="columns is-mobile">
       <div class="column has-text-centered">
         <router-link
-          :to="{name: 'dashboard'}"
-          aria-label="Dashboard"
-        >
-          <button class="button">
-            Home
-          </button>
-        </router-link>
-      </div>
-      <div class="column has-text-centered">
-        <router-link
           :to="{name: 'products'}"
           aria-label="Produkte"
         >

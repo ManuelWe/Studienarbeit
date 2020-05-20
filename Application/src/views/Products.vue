@@ -6,7 +6,7 @@
           v-model="searchString"
           class="input"
           aria-label="Suchfeld"
-          placeholder="Suche..."
+          placeholder="Suche Produkt"
           type="search"
           icon-pack="fas"
           icon="search"
