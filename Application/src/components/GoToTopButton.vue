@@ -5,10 +5,10 @@
     @click="goToTop()"
   >
     <span
-      class="icon is-small"
+      class="icon"
       style="color: white"
     >
-      <i class="fas fa-chevron-up fa-2x" />
+      <i class="fas fa-chevron-up fa-3x" />
     </span>
   </button>
 </template>
@@ -41,15 +41,15 @@ export default {
 
 <style scoped>
 #toTopButton {
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.7);
   position: fixed;
-  border-style: solid;
-  border-color: black;
+  border-style: none;
   outline: none;
   cursor: pointer;
   bottom: 14%;
   right: 3%;
-  padding: 0.5rem;
+  height: 3rem;
+  width: 3rem;
   border-radius: 4px;
 }
 </style>
