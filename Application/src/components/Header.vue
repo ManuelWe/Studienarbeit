@@ -4,10 +4,10 @@
       <b-navbar-item tag="div">
         <button
           :style="{visibility: $route.name === 'product' ? 'visible':'hidden'}"
-          class="button returnButton"
+          class="button is-medium returnButton"
           @click="previousPage()"
         >
-          <span class="icon is-small">
+          <span class="icon">
             <i class="fas fa-arrow-left fa-2x" />
           </span>
         </button>
