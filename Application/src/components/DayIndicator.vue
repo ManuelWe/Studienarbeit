@@ -44,14 +44,14 @@ export default {
 
 <style scoped>
 .circle {
-  height: 35px;
+  height: 30px;
   width: 30px;
   background-color: rgb(221, 221, 221);
   border-radius: 50%;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  line-height: 35px;       /* The same as height */
+  line-height: 30px;       /* The same as height */
   font-size: 30px;
 }
 #circleWrapper {
