@@ -11,7 +11,7 @@
         v-for="(day, index) in days"
         :key="index"
         class="control circle is-size-6"
-        :style="{'background-color': checkContained(day)?'rgb(255, 89, 89)':'rgb(221, 221, 221)'}"
+        :style="{'background-color': checkContained(day)?'rgb(50, 252, 60)':'rgb(252, 56, 56)'}"
       >{{ day }}</span>
     </div>
   </div>
