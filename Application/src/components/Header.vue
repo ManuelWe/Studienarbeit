@@ -3,7 +3,7 @@
     <template slot="brand">
       <b-navbar-item tag="div">
         <button
-          :style="{visibility: $route.name !== 'dashboard' ? 'visible':'hidden'}"
+          :style="{visibility: $route.name === 'product' ? 'visible':'hidden'}"
           class="button returnButton"
           @click="previousPage()"
         >
@@ -44,7 +44,6 @@ export default {
   },
   computed: {
     headerText() {
-      if (this.$route.name === 'dashboard') return 'Übersicht';
       if (this.$route.name === 'products') return 'Backwaren';
       if (this.$route.name === 'product') {
         const queriedProduct = this.getProduct(this.$route.params.ArtNr);

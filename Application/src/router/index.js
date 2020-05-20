@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 const LandingPage = () => import('../views/LandingPage.vue');
-const Dashboard = () => import('../views/Dashboard.vue');
 const Products = () => import('../views/Products.vue');
 const Product = () => import('../views/Product.vue');
 const Kreuztabelle = () => import('../views/Kreuztabelle.vue');
@@ -17,11 +16,6 @@ const routes = [
     components: {
       landingPage: LandingPage,
     },
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: Dashboard,
   },
   {
     path: '/produkte',

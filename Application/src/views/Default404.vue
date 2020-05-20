@@ -3,9 +3,9 @@
     <h1>Uuuuuups. Diese Seite existiert nicht.</h1>
     <router-link
       class="router-link"
-      :to="{name: 'dashboard'}"
+      :to="{name: 'products'}"
     >
-      <h2>Zurück zur Startseite</h2>
+      <h2>Zurück zu den Produkten</h2>
     </router-link>
   </div>
 </template>
