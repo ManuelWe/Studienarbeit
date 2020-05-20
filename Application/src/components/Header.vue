@@ -15,7 +15,7 @@
     </template>
     <template slot="start">
       <b-navbar-item tag="div">
-        <h1 class="is-size-3">
+        <h1 class="is-size-2">
           {{ headerText }}
         </h1>
       </b-navbar-item>
