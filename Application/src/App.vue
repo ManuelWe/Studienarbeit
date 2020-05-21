@@ -119,11 +119,7 @@ export default {
           this.getImages();
           localStorage.setItem('apiVersion', apiVersion);
         }
-      }).catch((e) => this.$buefy.toast.open({
-        duration: 4000,
-        message: e,
-        type: 'is-danger',
-      }));
+      }).catch(() => console.error('Applikation offline'));
     },
     getProducts() {
       ProductsService.getProducts().then((response) => {
