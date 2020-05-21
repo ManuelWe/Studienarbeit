@@ -114,9 +114,7 @@ export default {
     getApiVersion() {
       ApiVersionService.getApiVersion().then((response) => {
         const apiVersion = response.data.fields.version;
-        if (localStorage.getItem('apiVersion') === null) {
-          localStorage.setItem('apiVersion', apiVersion);
-        } else if (localStorage.getItem('apiVersion') < apiVersion) {
+        if (localStorage.getItem('apiVersion') === null || localStorage.getItem('apiVersion') < apiVersion) {
           this.getProducts();
           this.getImages();
           localStorage.setItem('apiVersion', apiVersion);
