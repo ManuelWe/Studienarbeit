@@ -119,7 +119,7 @@ export default {
           this.getImages();
           localStorage.setItem('apiVersion', apiVersion);
         }
-      }).catch(() => console.error('Applikation offline'));
+      }); // console.error('Applikation offline'));
     },
     getProducts() {
       ProductsService.getProducts().then((response) => {
