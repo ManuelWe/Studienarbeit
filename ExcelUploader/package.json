@@ -5,7 +5,7 @@
   "main": "ExcelParser.js",
   "dependencies": {
     "contentful-management": "^5.26.3",
-    "exceljs": "^3.7.0"
+    "exceljs": "^3.9.0"
   },
   "devDependencies": {},
   "scripts": {
